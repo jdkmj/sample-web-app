@@ -1,0 +1,37 @@
+steps:
+  # 1. Authenticate Docker to GCP Artifact Registry
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        echo "Logging in to Google Artifact Registry..."
+        gcloud auth configure-docker us-east1-docker.pkg.dev
+
+  # 2. Build the Docker image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "us-east1-docker.pkg.dev/PROJECT_ID/sample-web-app-repo/sample-web-app:latest",
+        "."
+      ]
+
+  # 3. Push the image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-east1-docker.pkg.dev/PROJECT_ID/sample-web-app-repo/sample-web-app:latest"
+      ]
+
+# Optional: store build artifacts (usually not needed for container builds)
+artifacts:
+  objects:
+    location: "gs://YOUR_BUCKET_NAME/build-artifacts/"
+    paths: ["**/*"]
+
+# (Optional) image list to show in Cloud Build UI
+images:
+  - "us-east1-docker.pkg.dev/PROJECT_ID/sample-web-app-repo/sample-web-app:latest"
