@@ -14,7 +14,7 @@ steps:
       [
         "build",
         "-t",
-        "us-east1-docker.pkg.dev/PROJECT_ID/sample-web-app-repo/sample-web-app:latest",
+        "us-east1-docker.pkg.dev/dept-x-project-481006/sample-web-app-repo/sample-web-app:latest",
         "."
       ]
 
@@ -23,7 +23,7 @@ steps:
     args:
       [
         "push",
-        "us-east1-docker.pkg.dev/PROJECT_ID/sample-web-app-repo/sample-web-app:latest"
+        "us-east1-docker.pkg.dev/dept-x-project-481006/sample-web-app-repo/sample-web-app:latest"
       ]
 
 # Optional: store build artifacts (usually not needed for container builds)
@@ -34,4 +34,4 @@ artifacts:
 
 # (Optional) image list to show in Cloud Build UI
 images:
-  - "us-east1-docker.pkg.dev/PROJECT_ID/sample-web-app-repo/sample-web-app:latest"
+  - "us-east1-docker.pkg.dev/dept-x-project-481006/sample-web-app-repo/sample-web-app:latest"
